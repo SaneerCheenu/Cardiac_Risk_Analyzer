@@ -10,7 +10,19 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-	return render_template('main.html')
+	return render_template('index.html')
+
+@app.route('/tool')
+def tool():
+      return render_template('main.html')
+
+@app.route('/about')
+def about_us():
+    return render_template('about_us.html')
+
+@app.route('/faqs')
+def faqs():
+    return render_template('faqs.html')
 
 
 @app.route('/predict', methods=['GET','POST'])
