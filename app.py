@@ -50,29 +50,34 @@ def submit_form():
         
         return 'Form submitted successfully!'
 
-@app.route('/predict', methods=['GET','POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
-
-        age = int(request.form['age'])
-        sex = request.form.get('sex')
-        cp = request.form.get('cp')
-        trestbps = int(request.form['trestbps'])
-        chol = int(request.form['chol'])
-        fbs = request.form.get('fbs')
-        restecg = int(request.form['restecg'])
-        thalach = int(request.form['thalach'])
-        exang = request.form.get('exang')
-        oldpeak = float(request.form['oldpeak'])
-        slope = request.form.get('slope')
-        ca = int(request.form['ca'])
-        thal = request.form.get('thal')
-        
-        data = np.array([[age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]])
-        my_prediction = model.predict(data)
-        
-        return render_template('result.html', prediction=my_prediction)
-        
+        try:
+            age = int(request.form['age'])
+            sex = request.form.get('sex')
+            cp = request.form.get('cp')
+            trestbps = int(request.form['trestbps'])
+            chol = int(request.form['chol'])
+            fbs = request.form.get('fbs')
+            restecg = int(request.form['restecg'])
+            thalach = int(request.form['thalach'])
+            exang = request.form.get('exang')
+            oldpeak = float(request.form['oldpeak'])
+            slope = request.form.get('slope')
+            ca = int(request.form['ca'])
+            thal = request.form.get('thal')
+            
+            # Proceed with prediction
+            data = np.array([[age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]])
+            my_prediction = model.predict(data)
+            
+            return render_template('result.html', prediction=my_prediction)
+        except ValueError:
+            return render_template('error.html')
+    else:
+        # Handle GET request (direct access without form submission)
+        return render_template('error.html')
         
 
 if __name__ == '__main__':
