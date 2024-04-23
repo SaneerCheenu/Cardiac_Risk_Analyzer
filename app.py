@@ -28,6 +28,9 @@ def faqs():
 def help():
      return render_template('help.html')
 
+@app.route('/contacts')
+def contacts():
+     return render_template('contacts.html')
 
 @app.route('/predict', methods=['GET','POST'])
 def predict():
