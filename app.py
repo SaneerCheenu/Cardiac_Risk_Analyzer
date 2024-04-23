@@ -24,6 +24,10 @@ def about_us():
 def faqs():
     return render_template('faqs.html')
 
+@app.route('/help')
+def help():
+     return render_template('help.html')
+
 
 @app.route('/predict', methods=['GET','POST'])
 def predict():

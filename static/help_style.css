@@ -116,7 +116,7 @@
     align-items: flex-start;
     flex-direction: row;
     justify-content: flex-start;
-    background-color: #E5D2CE;
+    background-color: white;
   }
   .featuresIcon {
     fill: var(--dl-color-custom-neutral-dark);
@@ -163,13 +163,12 @@
   }
   .faqContainer {
     flex: 0 0 auto;
-    color: navy;
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: center;
-    background-color: beige;
+    background-color: #E5D2CE;
   }
   .navbarContainer {
     color: var(--dl-color-custom-neutral-dark);
