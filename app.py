@@ -19,7 +19,7 @@ def home():
 
 @app.route('/tool')
 def tool():
-      return render_template('main.html')
+      return render_template('tool.html')
 
 @app.route('/about')
 def about_us():
