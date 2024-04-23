@@ -221,8 +221,8 @@
                 </span>
               </span>
               <div class="home-btn-group">
-                <button class="buttonFilled">Get Started</button>
-                <button class="buttonFlat">Learn More&nbsp;→</button>
+                <button class="buttonFilled" onclick="window.location.href='{{ url_for('tool') }}'" >Get Started</button>
+                <button class="buttonFlat" onclick="window.location.href='{{ url_for('faqs') }}'" >Learn More&nbsp;→</button>
               </div>
             </div>
           </div>
@@ -341,7 +341,7 @@
                 </span>
               </span>
             </span>
-            <button class="buttonFilled">Learn More</button>
+            <button class="buttonFilled" onclick="window.location.href='{{ url_for('faqs') }}'">Learn More</button>
           </div>
         </div>
         <div class="home-footer">

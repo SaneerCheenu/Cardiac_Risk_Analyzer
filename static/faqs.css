@@ -44,48 +44,17 @@
     flex: 1;
     display: flex;
     align-items: center;
-    animation-name: none;
     flex-direction: row;
-    animation-delay: 0s;
     justify-content: flex-end;
-    animation-duration: 300ms;
-    animation-direction: normal;
-    animation-iteration-count: 1;
-    animation-timing-function: ease;
-  }
-  .home-nav12 {
-    animation-name: zoomIn;
-    animation-delay: 0s;
-    animation-duration: 300ms;
-    animation-direction: normal;
-    animation-iteration-count: 1;
-    animation-timing-function: ease;
   }
   .home-nav22 {
     margin-left: var(--dl-space-space-unit);
-    animation-name: zoomIn;
-    animation-delay: 0s;
-    animation-duration: 300ms;
-    animation-direction: normal;
-    animation-iteration-count: 1;
-    animation-timing-function: ease;
   }
   .home-nav32 {
     margin-left: var(--dl-space-space-unit);
-    animation-delay: 0s;
-    animation-duration: 300ms;
-    animation-direction: normal;
-    animation-iteration-count: 1;
-    animation-timing-function: ease;
   }
   .home-nav42 {
     margin-left: var(--dl-space-space-unit);
-    animation-name: zoomIn;
-    animation-delay: 0s;
-    animation-duration: 300ms;
-    animation-direction: normal;
-    animation-iteration-count: 1;
-    animation-timing-function: ease;
   }
   .home-buttons {
     border: 2px dashed rgba(120, 120, 120, 0.4);
