@@ -2,11 +2,16 @@ from flask import Flask, render_template, request
 import pickle
 import numpy as np
 import os
+from pymongo import MongoClient
 
 filename = 'random_forest_model.pkl'
 model = pickle.load(open(filename, 'rb'))
 
 app = Flask(__name__)
+
+client = MongoClient('mongodb+srv://saneer2001:jaishreeram@mongopject.bh69gat.mongodb.net/')
+db = client['contact_form_db']
+collection = db['contact_form']
 
 @app.route('/')
 def home():
@@ -31,6 +36,19 @@ def help():
 @app.route('/contacts')
 def contacts():
      return render_template('contacts.html')
+
+@app.route('/submit', methods=['POST'])
+def submit_form():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+        
+        # Insert form data into MongoDB
+        submission = {'name': name, 'email': email, 'message': message}
+        collection.insert_one(submission)
+        
+        return 'Form submitted successfully!'
 
 @app.route('/predict', methods=['GET','POST'])
 def predict():
