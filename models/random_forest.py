@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import make_scorer, f1_score, recall_score, precision_score
+from sklearn.metrics import make_scorer, f1_score, recall_score, precision_score, roc_auc_score
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 import pickle
 
@@ -50,8 +50,9 @@ data.head()
 x_train, x_test, y_train, y_test = train_test_split(data, target, test_size=0.2,random_state=42)
 
 
+
 # Random Forest Classifier
-classifierRF= RandomForestClassifier(random_state=1)
+classifierRF= RandomForestClassifier(max_depth=5, random_state=1)
 classifierRF.fit(x_train, y_train)
 classifierRF.score(x_test, y_test)
 
@@ -73,3 +74,42 @@ sns.heatmap(cmx/np.sum(cmx), annot=True, fmt='.2%', cmap='Blues')
 
 print('\n')
 print(classification_report(y_test, y_preds))
+
+def eval_model(model, x_train, x_test, y_train, y_test):
+    """
+    Function to evaluate the given model based on Train and test data.
+
+    """
+    eval_df = pd.DataFrame(index=['RFClassifier'])
+
+    y_train_pred = model.predict(x_train)
+    y_test_pred = model.predict(x_test)
+
+    eval_df['Train Accuracy'] = accuracy_score(y_train, y_train_pred)
+    eval_df['Test Accuracy'] = accuracy_score(y_test, y_test_pred)
+
+    eval_df['Train ROC AUC Score'] = roc_auc_score(y_train, y_train_pred)
+    eval_df['Test ROC AUC Score'] = roc_auc_score(y_test, y_test_pred)
+
+    eval_df['Train F1 Score'] = f1_score(y_train, y_train_pred)
+    eval_df['Test F1 Score'] = f1_score(y_test, y_test_pred)
+
+    eval_df['Train Precision Score'] = precision_score(y_train, y_train_pred)
+    eval_df['Test Precision Score'] = precision_score(y_test, y_test_pred)
+
+    eval_df['Train Recall Score'] = recall_score(y_train, y_train_pred)
+    eval_df['Test Recall Score'] = recall_score(y_test, y_test_pred)
+
+    return eval_df.T
+
+eval_df = eval_model(classifierRF, x_train, x_test, y_train, y_test)
+eval_df
+
+plt.figure(figsize=(15, 8))
+colors = sns.color_palette('pastel')
+ax = sns.barplot(data=eval_df, x=eval_df.index, y='RFClassifier', palette=colors)
+for container in ax.containers:
+    ax.bar_label(container)
+plt.title('Evaluation Metrics Plot')
+plt.tight_layout()
+plt.show()
